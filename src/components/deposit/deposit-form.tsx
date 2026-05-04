@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
-import { useSendTransaction } from "wagmi";
+import { useAccount, useSendTransaction } from "wagmi";
 import { parseUnits, encodeFunctionData } from "viem";
 import {
   ArrowDownToLine,

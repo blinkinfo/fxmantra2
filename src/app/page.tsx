@@ -63,26 +63,10 @@ const features = [
 ];
 
 const steps = [
-  {
-    num: "01",
-    title: "Connect Your Wallet",
-    desc: "Sign in with your crypto wallet or email via Privy. No KYC, no friction.",
-  },
-  {
-    num: "02",
-    title: "Deposit USDC",
-    desc: "Send USDC on Base to your vault. Minimum $10 to start earning.",
-  },
-  {
-    num: "03",
-    title: "Earn 10% Monthly",
-    desc: "Watch your balance grow at 10% per month, tracked in real-time.",
-  },
-  {
-    num: "04",
-    title: "Withdraw Profits",
-    desc: "On the 1st, 11th, or 21st, withdraw your accumulated earnings.",
-  },
+  { num: "01", title: "Connect Your Wallet", desc: "Sign in with your crypto wallet or email via Privy. No KYC, no friction." },
+  { num: "02", title: "Deposit USDC", desc: "Send USDC on Base to your vault. Minimum $10 to start earning." },
+  { num: "03", title: "Earn 10% Monthly", desc: "Watch your balance grow at 10% per month, tracked in real-time." },
+  { num: "04", title: "Withdraw Profits", desc: "On the 1st, 11th, or 21st, withdraw your accumulated earnings." },
 ];
 
 export default function LandingPage() {
@@ -90,11 +74,8 @@ export default function LandingPage() {
   const router = useRouter();
 
   const handleCTA = () => {
-    if (authenticated) {
-      router.push("/dashboard");
-    } else {
-      login();
-    }
+    if (authenticated) router.push("/dashboard");
+    else login();
   };
 
   return (
@@ -102,10 +83,8 @@ export default function LandingPage() {
       <Navbar />
 
       <main>
-        {/* Hero */}
         <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-glow-gradient pointer-events-none" />
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -117,53 +96,38 @@ export default function LandingPage() {
               Live on Base Network
               <ChevronRight size={12} />
             </div>
-
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none mb-6">
-              Earn{" "}
-              <span className="gradient-text">10%</span>
-              <br />
-              Every Month
+              Earn <span className="gradient-text">10%</span>
+              <br />Every Month
             </h1>
-
             <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
               Deposit USDC on Base and watch your crypto grow at a guaranteed{" "}
               <span className="text-white font-semibold">10% monthly yield</span>.
               No lock-ups, no hidden fees, just pure compounding returns.
             </p>
-
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
               <Button onClick={handleCTA} size="lg" className="shadow-glow-lg">
                 {authenticated ? "Go to Dashboard" : "Start Earning Now"}
                 <ArrowRight size={18} />
               </Button>
               <Link href="#how-it-works">
-                <Button variant="ghost" size="lg">
-                  How it works
-                </Button>
+                <Button variant="ghost" size="lg">How it works</Button>
               </Link>
             </div>
-
-            {/* Stats row */}
             <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
               {[
                 { label: "Monthly APY", value: "10%" },
                 { label: "Network", value: "Base" },
                 { label: "Min Deposit", value: "$10" },
               ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="glass rounded-2xl p-4 border border-white/5"
-                >
-                  <p className="text-2xl font-black gradient-text">
-                    {stat.value}
-                  </p>
+                <div key={stat.label} className="glass rounded-2xl p-4 border border-white/5">
+                  <p className="text-2xl font-black gradient-text">{stat.value}</p>
                   <p className="text-xs text-gray-500 mt-1">{stat.label}</p>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* Floating card */}
           <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -191,36 +155,25 @@ export default function LandingPage() {
 
           <motion.div
             animate={{ y: [0, 10, 0] }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1,
-            }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             className="hidden lg:block absolute left-16 bottom-20 glass rounded-2xl p-4 border border-white/8 shadow-card w-44"
           >
             <p className="text-xs text-gray-500 mb-1">Next withdrawal</p>
             <p className="text-sm font-bold text-white">1st of month</p>
-            <p className="text-xs text-primary mt-1">
-              1st · 11th · 21st
-            </p>
+            <p className="text-xs text-primary mt-1">1st · 11th · 21st</p>
           </motion.div>
         </section>
 
-        {/* Features */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-14">
               <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
-                Everything you need to{" "}
-                <span className="gradient-text">grow your crypto</span>
+                Everything you need to <span className="gradient-text">grow your crypto</span>
               </h2>
               <p className="text-gray-400 max-w-xl mx-auto">
-                A powerful, transparent yield platform designed for serious
-                investors who want consistent monthly returns.
+                A powerful, transparent yield platform designed for serious investors.
               </p>
             </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {features.map((feature, i) => {
                 const Icon = feature.icon;
@@ -233,17 +186,11 @@ export default function LandingPage() {
                     transition={{ delay: i * 0.08 }}
                     className="glass rounded-2xl p-6 border border-white/5 card-hover"
                   >
-                    <div
-                      className={`w-11 h-11 rounded-xl ${feature.bg} flex items-center justify-center mb-4`}
-                    >
+                    <div className={`w-11 h-11 rounded-xl ${feature.bg} flex items-center justify-center mb-4`}>
                       <Icon size={20} className={feature.color} />
                     </div>
-                    <h3 className="font-bold text-white mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm text-gray-400 leading-relaxed">
-                      {feature.desc}
-                    </p>
+                    <h3 className="font-bold text-white mb-2">{feature.title}</h3>
+                    <p className="text-sm text-gray-400 leading-relaxed">{feature.desc}</p>
                   </motion.div>
                 );
               })}
@@ -251,22 +198,14 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* How it works */}
-        <section
-          id="how-it-works"
-          className="py-20 px-4 sm:px-6 lg:px-8"
-        >
+        <section id="how-it-works" className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-14">
               <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
                 How it <span className="gradient-text">works</span>
               </h2>
-              <p className="text-gray-400">
-                Start earning in 4 simple steps. No complex DeFi knowledge
-                required.
-              </p>
+              <p className="text-gray-400">Start earning in 4 simple steps.</p>
             </div>
-
             <div className="space-y-4">
               {steps.map((step, i) => (
                 <motion.div
@@ -277,16 +216,10 @@ export default function LandingPage() {
                   transition={{ delay: i * 0.1 }}
                   className="glass rounded-2xl p-6 border border-white/5 flex items-start gap-5"
                 >
-                  <span className="text-3xl font-black gradient-text shrink-0">
-                    {step.num}
-                  </span>
+                  <span className="text-3xl font-black gradient-text shrink-0">{step.num}</span>
                   <div>
-                    <h3 className="font-bold text-white text-lg mb-1">
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
-                      {step.desc}
-                    </p>
+                    <h3 className="font-bold text-white text-lg mb-1">{step.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">{step.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -294,7 +227,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* CTA */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
             <motion.div
@@ -306,15 +238,10 @@ export default function LandingPage() {
               <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
                 <TrendingUp size={28} className="text-primary" />
               </div>
-              <h2 className="text-3xl font-black text-white mb-3">
-                Ready to start earning?
-              </h2>
+              <h2 className="text-3xl font-black text-white mb-3">Ready to start earning?</h2>
               <p className="text-gray-400 mb-8">
                 Join thousands of investors earning{" "}
-                <span className="text-white font-semibold">
-                  10% every month
-                </span>{" "}
-                on their USDC.
+                <span className="text-white font-semibold">10% every month</span> on their USDC.
               </p>
               <Button onClick={handleCTA} size="lg" className="shadow-glow">
                 {authenticated ? "Go to Dashboard" : "Connect Wallet & Start"}
@@ -326,9 +253,7 @@ export default function LandingPage() {
       </main>
 
       <footer className="py-8 px-4 border-t border-white/5 text-center">
-        <p className="text-xs text-gray-600">
-          © 2025 YieldVault · Built on Base · All rights reserved
-        </p>
+        <p className="text-xs text-gray-600">© 2025 YieldVault · Built on Base · All rights reserved</p>
       </footer>
     </div>
   );

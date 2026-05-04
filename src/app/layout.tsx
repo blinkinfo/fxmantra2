@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "./providers";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "YieldVault — Earn 10% Monthly on Your Crypto",
   description:

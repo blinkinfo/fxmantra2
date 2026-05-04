@@ -9,7 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { format, subMonths, addDays } from "date-fns";
+import { format, addDays } from "date-fns";
 
 interface ProfitChartProps {
   depositAmount: number;
@@ -59,11 +59,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export default function ProfitChart({
   depositAmount,
-  depositDate = subMonths(new Date(), 1),
+  depositDate,
 }: ProfitChartProps) {
+  const resolvedDate = depositDate ?? new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
   const data = generateChartData(
     depositAmount || 1000,
-    depositDate
+    resolvedDate
   );
 
   return (
