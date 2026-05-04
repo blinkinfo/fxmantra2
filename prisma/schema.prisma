@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String        @id @default(cuid())
+  privyId       String        @unique
+  walletAddress String?
+  email         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  deposits      Deposit[]
+  withdrawals   Withdrawal[]
+  transactions  Transaction[]
+
+  @@map("users")
+}
+
+model Deposit {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  amount      Float
+  token       String    @default("USDC")
+  txHash      String    @unique
+  status      String    @default("pending")
+  confirmedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@map("deposits")
+}
+
+model Withdrawal {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  amount      Float
+  token       String    @default("USDC")
+  txHash      String?
+  status      String    @default("pending")
+  requestedAt DateTime  @default(now())
+  processedAt DateTime?
+
+  @@map("withdrawals")
+}
+
+model Transaction {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String
+  amount    Float
+  token     String   @default("USDC")
+  txHash    String?
+  status    String   @default("pending")
+  note      String?
+  createdAt DateTime @default(now())
+
+  @@map("transactions")
+}
